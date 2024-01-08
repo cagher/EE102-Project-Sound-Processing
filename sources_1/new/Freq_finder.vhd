@@ -76,19 +76,15 @@ architecture Behavioral of Freq_finder is
     signal data_tlast, tvalid_fft, tlast_fft,
      frame_started, tlast_unexpected, tlast_missing, status_channel_halt, data_in_channel_halt
      , data_out_channel_halt: std_logic;
-     signal config_tready, data_tready : std_logic := '1';
-     signal config_tready1, data_tready1, data_tlast1, tvalid_ifft, tlast_ifft,
-     frame_started1, tlast_unexpected1, tlast_missing1, status_channel_halt1, data_in_channel_halt1
-     , data_out_channel_halt1: std_logic;
+    signal config_tready, data_tready : std_logic;
     signal ifft_ready, main_ready, main_valid : std_logic := '1';
     signal fft_out, fft_data, data_out : std_logic_vector(63 downto 0);
     signal index_buffer : std_logic_vector(13 downto 0) := (others => '0');
     signal valid_divide : std_logic := '1';
-    signal validate : integer range 0 to 79 := 0; 
+    signal validate : integer range 0 to 79 := 0; --signal to decrease the sampling frequecy of the xFFT IP CORE to 12.5 kHz
 
 begin
     data_in <= data_config & samp;
-     main_ready<= '1'; main_valid <= '1';
     ris_edge_count <= not counter(6);
     
     clk_div : process (clock)
