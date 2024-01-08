@@ -226,7 +226,7 @@ begin
     daddr_in <= "00" & cout;
     vanal_p <= JXADC(0); vanal_n <= JXADC(4);
     
-    frequency : Freq_finder PORT MAP(
+    frequency : Freq_finder port map(
         samp => do_out(15 downto 4),
         clock => clk,
         freq => freq
